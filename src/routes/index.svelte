@@ -5,16 +5,19 @@
 	let activeTab = 0;
 
 	async function handleSubmit(event) {
-		const res = await fetch('https://matiasfha.dev/.netlify/functions/preMailer', {
-			method: 'POST',
-			body: JSON.stringify({
-				markdown: markdownValue,
-				css: customCss
-			}),
-			headers: {
-				mode: 'no-cors'
+		const res = await fetch(
+			'https://crossorigin.me/https://matiasfha.dev/.netlify/functions/preMailer',
+			{
+				method: 'POST',
+				body: JSON.stringify({
+					markdown: markdownValue,
+					css: customCss
+				}),
+				headers: {
+					mode: 'no-cors'
+				}
 			}
-		});
+		);
 		resultHTML = await res.text();
 	}
 
@@ -23,6 +26,16 @@
 		resultHTML = '';
 	}
 </script>
+
+<svelte:head>
+	<title>NewsletterIO | Get the html to your email editor</title>
+	<meta charset="utf-8" >
+	<meta name="description" content="Transform your markdown content into ready to use html snippet for your newsletter" >
+	<meta name=”robots” content="index, follow">
+	<meta name="author" content="Matias Hernández" >
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="og:type" property="og:type" content="website">
+</svelte:head>
 
 <div class="m-auto max-w-screen-xl	 p-12">
 	<div class="flex flex-col md:flex-row">
