@@ -10,7 +10,10 @@
 			body: JSON.stringify({
 				markdown: markdownValue,
 				css: customCss
-			})
+			}),
+			headers: {
+				mode: 'no-cors'
+			}
 		});
 		resultHTML = await res.text();
 	}
