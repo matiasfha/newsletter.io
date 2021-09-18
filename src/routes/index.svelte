@@ -34,9 +34,9 @@
 	/>
 </svelte:head>
 
-<div class="m-auto max-w-screen-xl	 p-12">
-	<div class="flex flex-col md:flex-row">
-		<div class="md:w-1/2 max-w-md flex flex-col justify-center">
+<div class="m-auto max-w-screen-xl px-4 md:px-0 py-12">
+	<div class="grid grid-flow-row md:grid-flow-col">
+		<div class="flex flex-col justify-center">
 			<div class="md:text-5xl text-2xl uppercase font-black">
 				A tool for your upcoming newsletter
 			</div>
@@ -55,9 +55,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="flex md:justify-end w-full md:w-1/2 -mt-5">
+		<div class="flex md:justify-end w-full -mt-5">
 			<div class="bg-dots">
-				<div class="shadow-2xl max-w-md z-10 rounded-full mt-6 ml-4">
+				<div class="shadow-2xl w-full z-10 rounded-full mt-6 ml-0 md:ml-4">
 					<img alt="card img" class="rounded-t" src="/newsletter-marketing.jpg" />
 					<div class="text-md p-10 bg-white">
 						<ol class="list-decimal mx-auto ml-4 leading-tight">
@@ -74,7 +74,9 @@
 	</div>
 </div>
 
-<main class="grid grid-cols-2 gap-4 max-w-screen-xl mx-auto pt-8 h-auto pb-24">
+<main
+	class="grid grid-rows-2 md:grid-cols-2 gap-4 max-w-screen-xl mx-auto pt-8 h-auto pb-24 px-4 md:px-0"
+>
 	<form on:submit|preventDefault={handleSubmit} class="w-full">
 		<label for="markdown" class="text-2xl font-bold py-2"
 			>Markdown Area

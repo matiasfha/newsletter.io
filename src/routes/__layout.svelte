@@ -57,7 +57,7 @@
 			/>
 		</div>
 
-		<div class="grid grid-cols-2 gap-5 text-gray-400">
+		<div class="hidden md:grid grid-cols-2 gap-5 text-gray-400">
 			<div class="col-span-2 md:col-span-1 pb-0 md:py-3 px-4">
 				<h3
 					class="py-1.5 md:py-4 text-center sm:text-left text-xl text-gray-500 font-bold tracking-wide"
