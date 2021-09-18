@@ -5,19 +5,13 @@
 	let activeTab = 0;
 
 	async function handleSubmit(event) {
-		const res = await fetch(
-			'https://crossorigin.me/https://matiasfha.dev/.netlify/functions/preMailer',
-			{
-				method: 'POST',
-				body: JSON.stringify({
-					markdown: markdownValue,
-					css: customCss
-				}),
-				headers: {
-					mode: 'no-cors'
-				}
-			}
-		);
+		const res = await fetch('https://matiasfha.dev/.netlify/functions/preMailer', {
+			method: 'POST',
+			body: JSON.stringify({
+				markdown: markdownValue,
+				css: customCss
+			})
+		});
 		resultHTML = await res.text();
 	}
 
@@ -123,23 +117,23 @@
 		<ul class="list-reset flex border-b">
 			<li class="-mb-px mr-1">
 				<span
-					class="bg-white inline-block py-2 px-4 font-semibold hover:text-purple-500 focus:outline-none"
+					class="bg-white inline-block py-2 px-4 font-semibold hover:text-purple-500 focus:outline-none cursor-pointer"
 					class:activeTab={activeTab === 0}
-					on:click={() => (activeTab = 0)}>Preview</span
+					on:click={() => (activeTab = 0)}>HTML Code</span
 				>
 			</li>
 			<li class="mr-1">
 				<span
-					class="bg-white inline-block py-2 px-4 hover:text-blue-darker hover:text-purple-500 focus:outline-none"
+					class="bg-white inline-block py-2 px-4 hover:text-blue-darker hover:text-purple-500 focus:outline-none cursor-pointer"
 					class:activeTab={activeTab === 1}
-					on:click={() => (activeTab = 1)}>HTML Code</span
+					on:click={() => (activeTab = 1)}>Preview</span
 				>
 			</li>
 		</ul>
 		<div
-			class="relative container w-full p-20 mx-auto text-center bg-white border-2 border-t-0 border-gray-300 border-dashed h-[48.5rem] rounded-xl rounded-t-none"
+			class="relative container w-full p-2 mx-auto text-center bg-white border-2 border-t-0 border-gray-300 border-dashed h-[48.5rem] rounded-xl rounded-t-none"
 		>
-			<p class="mt-20 italic text-gray-500 text-md">
+			<div class="italic text-gray-500 text-md text-left">
 				{#if activeTab === 1}
 					<div>
 						{@html resultHTML}
@@ -152,14 +146,14 @@
 							>Copy to clipboard</button
 						>
 						<pre
-							class="max-w-4xl shadow-md flex-wrap whitespace-pre-wrap overflow-x-auto h-96">
+							class="flex-wrap whitespace-pre-wrap overflow-x-auto h-full">
 				<code>
 					{resultHTML}
 				</code>
 			</pre>
 					</div>
 				{/if}
-			</p>
+			</div>
 		</div>
 	</aside>
 </main>
