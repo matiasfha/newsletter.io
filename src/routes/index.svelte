@@ -14,14 +14,60 @@
 		});
 		resultHTML = await res.text();
 	}
+
+	function reset() {
+		markdownValue = '';
+		resultHTML = '';
+	}
 </script>
 
-<main class="grid grid-cols-2 gap-4 max-w-screen-xl mx-auto">
+<div class="m-auto max-w-screen-xl	 p-12">
+	<div class="flex flex-col md:flex-row">
+		<div class="md:w-1/2 max-w-md flex flex-col justify-center">
+			<div class="md:text-5xl text-2xl uppercase font-black">
+				A tool for your upcoming newsletter
+			</div>
+			<div class="text-xl mt-4">
+				Transform your carefully crafted markdown content into ready to use HTML snippet to include
+				in your newsletter email editor.
+				<br />
+				<strong>Include any syntax highlight you need</strong>
+			</div>
+			<div class="my-5 h-16">
+				<div
+					class="shadow-md font-medium py-2 px-4 text-yellow-100 hidden
+				cursor-pointer bg-yellow-600 hover:bg-yellow-500 rounded text-lg text-center w-48"
+				>
+					Join us now
+				</div>
+			</div>
+		</div>
+		<div class="flex md:justify-end w-full md:w-1/2 -mt-5">
+			<div class="bg-dots">
+				<div class="shadow-2xl max-w-md z-10 rounded-full mt-6 ml-4">
+					<img alt="card img" class="rounded-t" src="/newsletter-marketing.jpg" />
+					<div class="text-md p-10 bg-white">
+						<ol class="list-decimal mx-auto ml-4 leading-tight">
+							<li class="py-2">Write your content with markdown.</li>
+							<li class="py-2">Add custom css to style the html elements in the form below.</li>
+							<li class="py-2">Click the <strong>Transform</strong> button</li>
+							<li class="py-2">Copy the resulting HTML shown in the right tab.</li>
+							<li class="py-2">Send and Profit!</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<main class="grid grid-cols-2 gap-4 max-w-screen-xl mx-auto pt-8 h-auto pb-24">
 	<form on:submit|preventDefault={handleSubmit} class="w-full">
-		<label for="markdown" class="text-lg font-bold py-2"
+		<label for="markdown" class="text-2xl font-bold py-2"
 			>Markdown Area
 			<textarea
-				class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+				class="w-full h-96 px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
+				required
 				rows="10"
 				name="markdown"
 				id="markdown"
@@ -29,79 +75,82 @@
 			/></label
 		>
 
-		<label for="customCss" class="text-lg font-bold py-2"
+		<label for="customCss" class="text-2xl font-bold py-2"
 			>Custom css
 			<textarea
-				class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+				class="w-full h-96 px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
 				rows="6"
 				name="customCss"
 				id="customCss"
 				bind:value={customCss}
 			/></label
 		>
-		<div class="flex flex-row justify-between">
+		<div class="flex flex-row justify-between gap-16 pt-8">
 			<button
-				class="h-8 w-auto p-2 flex items-center justify-center rounded-md bg-indigo-300 shadow-md"
-				>Submit</button
+				on:click={reset}
+				type="reset"
+				class="w-full px-3 py-4 text-white bg-red-500 rounded-md hover:bg-red-600 focus:outline-none"
+				>Reset</button
 			>
 			<button
-				on:click={() => {
-					markdownValue = '';
-					resultHTML = '';
-				}}
-				type="reset"
-				class="h-8 w-auto p-2 flex items-center justify-center rounded-md bg-red-300 shadow-md"
-				>Reset</button
+				class="w-full px-3 py-4 text-white bg-yellow-500 rounded-md hover:bg-yellow-600 focus:outline-none"
+				>Transform</button
 			>
 		</div>
 	</form>
 
 	<aside class="w-full flex flex-col items-start">
 		<h1>Results</h1>
-		<ul
-			class="flex justify-start items-start my-4 border-separate border-b-2 border-indigo-300 w-full"
-		>
-			<li
-				class="cursor-pointer py-2 px-4"
-				class:active={activeTab === 0}
-				on:click={() => (activeTab = 0)}
-			>
-				Code
+		<ul class="list-reset flex border-b">
+			<li class="-mb-px mr-1">
+				<span
+					class="bg-white inline-block py-2 px-4 font-semibold hover:text-purple-500 focus:outline-none"
+					class:activeTab={activeTab === 0}
+					on:click={() => (activeTab = 0)}>Preview</span
+				>
 			</li>
-			<li
-				class="cursor-pointer py-2 px-4 "
-				class:active={activeTab === 1}
-				on:click={() => (activeTab = 1)}
-			>
-				Preview
+			<li class="mr-1">
+				<span
+					class="bg-white inline-block py-2 px-4 hover:text-blue-darker hover:text-purple-500 focus:outline-none"
+					class:activeTab={activeTab === 1}
+					on:click={() => (activeTab = 1)}>HTML Code</span
+				>
 			</li>
 		</ul>
-		{#if activeTab === 1}
-			<div>
-				{@html resultHTML}
-			</div>
-		{/if}
-		{#if activeTab === 0}
-			<div class="flex flex-col items-start gap-4">
-				<button
-					class="h-8 w-auto p-2 flex items-center justify-center rounded-md bg-indigo-300 shadow-md"
-					>Copy to clipboard</button
-				>
-				<pre
-					class="max-w-4xl shadow-md flex-wrap whitespace-pre-wrap overflow-x-auto h-96">
+		<div
+			class="relative container w-full p-20 mx-auto text-center bg-white border-2 border-t-0 border-gray-300 border-dashed h-[48.5rem] rounded-xl rounded-t-none"
+		>
+			<p class="mt-20 italic text-gray-500 text-md">
+				{#if activeTab === 1}
+					<div>
+						{@html resultHTML}
+					</div>
+				{/if}
+				{#if activeTab === 0}
+					<div class="flex flex-col items-start gap-4">
+						<button
+							class="absolute top-2 right-2 h-8 w-auto p-2 flex items-center justify-center rounded-md bg-yellow-300 shadow-md"
+							>Copy to clipboard</button
+						>
+						<pre
+							class="max-w-4xl shadow-md flex-wrap whitespace-pre-wrap overflow-x-auto h-96">
 				<code>
 					{resultHTML}
 				</code>
 			</pre>
-			</div>
-		{/if}
+					</div>
+				{/if}
+			</p>
+		</div>
 	</aside>
 </main>
 
 <style>
 	.active {
-		border: 2px gray solid;
-		border-bottom: 0;
-		border-radius: 5px;
+	}
+
+	.bg-dots {
+		background-image: url(https://assets-global.website-files.com/5b5a66e9f3166b36708705fa/5dea7a12bb83ab1f13040de5_cx-dots.svg);
+		background-repeat: no-repeat;
 	}
 </style>
