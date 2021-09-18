@@ -29,12 +29,15 @@
 
 <svelte:head>
 	<title>NewsletterIO | Get the html to your email editor</title>
-	<meta charset="utf-8" >
-	<meta name="description" content="Transform your markdown content into ready to use html snippet for your newsletter" >
-	<meta name=”robots” content="index, follow">
-	<meta name="author" content="Matias Hernández" >
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="og:type" property="og:type" content="website">
+	<meta charset="utf-8" />
+	<meta name="robots" content="index, follow" />
+	<meta name="author" content="Matias Hernández" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="og:type" property="og:type" content="website" />
+	<meta
+		name="description"
+		content="Transform your markdown content into ready to use html snippet for your newsletter"
+	/>
 </svelte:head>
 
 <div class="m-auto max-w-screen-xl	 p-12">
